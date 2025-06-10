@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Happy Valentine's Day</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #d63384;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            touch-action: manipulation;
+            background-image: linear-gradient(135deg, #d63384 0%, #6a11cb 100%);
+        }
+
+        .painel {
+            background-color: white;
+            width: 100%;
+            max-width: 95%;
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #d63384;
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+        }
+
+        img {
+            width: 85%;
+            max-width: 250px;
+            height: auto;
+            margin: 12px 0;
+            border-radius: 8px;
+            border: 2px solid #ff6b9d;
+        }
+
+        h2 {
+            color: #333;
+            margin: 12px 0 8px;
+            font-size: 1.2rem;
+        }
+
+        .mensagem {
+            color: #666;
+            margin: 8px 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            padding: 0 5px;
+        }
+
+        .eu-te-amo {
+            color: #d63384;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 2px 0;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        button {
+            height: 45px;
+            min-width: 90px;
+            padding: 0 18px;
+            border: none;
+            border-radius: 22px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #sim {
+            background-color: #ff6b9d;
+            color: white;
+        }
+
+        #sim:active {
+            background-color: #ff4785;
+            transform: scale(0.98);
+        }
+
+        #nao {
+            background-color: #9d9dff;
+            color: white;
+            position: relative;
+        }
+
+        .coracoes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .coracao {
+            position: absolute;
+            font-size: 18px;
+            color: #ff6b9d;
+            animation: flutuar 4s linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes flutuar {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        /* Melhorias para telas muito pequenas */
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            h2 {
+                font-size: 1.1rem;
+            }
+            
+            .mensagem {
+                font-size: 0.85rem;
+            }
+            
+            button {
+                height: 42px;
+                min-width: 80px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Efeito de toque para mobile */
+        button:active {
+            transform: scale(0.96);
+        }
+    </style>
+</head>
+<body>
+    <div class="painel">
+        <div class="coracoes" id="coracoes"></div>
+        <h1>Happy Valentine's Day</h1>
+        <img src="ursinhos-fofos-beijos.gif" alt="Ursinhos se beijando">
+        <h2>Aceita se casar comigo?</h2>
+        
+        <div class="mensagem">Você é a pessoa mais especial da minha vida.</div>
+        <div class="mensagem">Cada momento ao seu lado é um presente.</div>
+        <div class="mensagem"><a href="https://vin7ageee.github.io/mylove/" class="eu-te-amo">Eu te amo</a> mais do que todas as estrelas no céu.</div>
+        <div class="mensagem">Meu coração bate mais forte só por você.</div>
+        
+        <div class="botoes">
+            <button id="sim">Sim</button>
+            <button id="nao">Não</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para fazer o botão "Não" fugir
+        function fuja() {
+            const botaonao = document.getElementById("nao");
+            const painel = document.querySelector('.painel');
+            
+            const painelRect = painel.getBoundingClientRect();
+            const maxX = painelRect.width - botaonao.offsetWidth - 10;
+            const maxY = painelRect.height - botaonao.offsetHeight - 10;
+            
+            const aleatorioX = Math.floor(Math.random() * maxX);
+            const aleatorioY = Math.floor(Math.random() * maxY);
+            
+            botaonao.style.position = 'absolute';
+            botaonao.style.left = aleatorioX + "px";
+            botaonao.style.top = aleatorioY + "px";
+        }
+
+        // Adiciona eventos para o botão "Não" (mobile e desktop)
+        const botaonao = document.getElementById("nao");
+        botaonao.addEventListener('mouseover', fuja);
+        botaonao.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            fuja();
+        });
+
+        // Adiciona efeito especial quando clica no "Sim"
+        const botaosim = document.getElementById("sim");
+        const coracoesContainer = document.getElementById("coracoes");
+        
+        botaosim.addEventListener('click', function(e) {
+            e.preventDefault();
+            criarCoracoes();
+            setTimeout(() => {
+                alert("Eu sabia que você diria sim! 💖\nVocê acabou de fazer o meu dia perfeito!");
+            }, 800);
+        });
+
+        // Melhor tratamento para toque no botão Sim
+        botaosim.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            this.click();
+        });
+
+        function criarCoracoes() {
+            // Limpa corações existentes
+            coracoesContainer.innerHTML = '';
+            
+            // Cria corações (quantidade ajustada para mobile)
+            for (let i = 0; i < 30; i++) {
+                const coracao = document.createElement('div');
+                coracao.innerHTML = '❤️';
+                coracao.classList.add('coracao');
+                
+                // Posição aleatória
+                coracao.style.left = Math.random() * 100 + '%';
+                coracao.style.top = (Math.random() * 80 + 20) + '%';
+                
+                // Atraso e duração aleatórios
+                coracao.style.animationDelay = Math.random() * 1.5 + 's';
+                coracao.style.animationDuration = 2 + Math.random() * 2 + 's';
+                
+                coracoesContainer.appendChild(coracao);
+            }
+        }
+    </script>
+</body>
+</html>
